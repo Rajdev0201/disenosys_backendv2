@@ -5,9 +5,9 @@ const sendMail = require("../utils/sendEmail");
 const crypto = require("crypto")
 
 
-const CLIENT_ID = "86xiq0kdd6l43i";
-const CLIENT_SECRET = "WPL_AP1.ojibLusdShatmsUq.07+vuQ==";
-const REDIRECT_URI = "https://www.disenosys.com/course";
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
 
 exports.Register = async (req,res) => {
