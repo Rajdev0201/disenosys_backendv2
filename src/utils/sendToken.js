@@ -4,11 +4,13 @@ const sendToken = (user,res,statusCode) => {
 
     const token = user.getJwtToken();
     const options = {
-        expires: new Date(Date.now() + 8 * 3600000),
-         httpOnly: true,
-         secure: true, // true in production (https)
-         sameSite: "strict",
-    }
+  expires: new Date(Date.now() + 8 * 60 * 60 * 1000),
+  httpOnly: true,
+  secure: true,          // REQUIRED for SameSite=None
+  sameSite: "none",      // 🔴 REQUIRED
+  path: "/",             // 🔴 VERY IMPORTANT
+};
+
 
     res.status(statusCode).cookie('token',token,options).json({
         success: true,
