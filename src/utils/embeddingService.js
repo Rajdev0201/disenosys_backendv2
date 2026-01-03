@@ -1,6 +1,6 @@
 const OpenAI = require('openai');
 const client = new OpenAI({
-  apiKey:process.env.GEMINI_KEY,  // store your Gemini API key in .env
+  apiKey:process.env.GOOGLE_API_KEY,  // store your Google API key in .env
   baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/"
 });
 async function embedText(text) {
@@ -21,4 +21,3 @@ async function embedTextBatch(textArray) {
 
 module.exports = { embedText, embedTextBatch };
 
-module.exports = { embedText, embedTextBatch };
