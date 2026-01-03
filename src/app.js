@@ -14,6 +14,7 @@ const enroll =  require("./routes/enroll");
 const contact = require("./routes/contact");
 const gpdx = require("./routes/gpdx");
 const policyBot = require("./routes/policyBot");
+const blog = require("./routes/blog");
 
 
 // const dotenv = require("dotenv")
@@ -46,6 +47,7 @@ app.use("/",enroll);
 app.use("/",contact);
 app.use("/",gpdx);
 app.use("/",policyBot);
+app.use("/",blog);
 
 //local port address
 app.listen(8000, () => {
