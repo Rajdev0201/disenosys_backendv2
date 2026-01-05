@@ -292,7 +292,7 @@ exports.ResetLink = async (req, res) => {
     const token = user.getresetPasswordToken();
     await user.save({ validateBeforeSave: false });
 
-    const resetUrl = `http://localhost:3000/reset-password?token=${token}`; // frontend route
+    const resetUrl = `https://www.disenosys.com/reset-password?token=${token}`; // frontend route
 
     const message = {
         to: userEmail,
