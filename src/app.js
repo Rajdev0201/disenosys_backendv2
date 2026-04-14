@@ -43,7 +43,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //accessing another domain req and send res
 app.use(cors({
-    origin:["http://localhost:3000","https://www.disenosys.com","http://localhost:3001"],
+    origin:["http://localhost:3000","https://www.disenosys.com","http://localhost:3001","https://disenosys-admin.vercel.app"],
     methods:['GET', 'POST', 'PUT', 'DELETE','PATCH'],
     credentials:true
 }));
