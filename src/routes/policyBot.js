@@ -5,7 +5,7 @@ const pdfParse = require("pdf-parse");
 const PolicyVector = require("../models/policyBot.js");
 const router = express.Router();
 const upload = multer();
-const { GoogleGenerativeAI, GoogleGenAI } = require("@google/genai");
+const { GoogleGenAI } = require("@google/genai");
 
 router.post("/upload-rag", upload.single("file"), async (req, res) => {
   try {
@@ -47,7 +47,6 @@ const ai = new GoogleGenAI({
 
 router.post("/ask", async (req, res) => {
   try {
-    console.log("➡️ /ask called");
 
     const { question } = req.body;
     console.log("Question:", question);
@@ -56,8 +55,7 @@ router.post("/ask", async (req, res) => {
       return res.status(400).json({ error: "Question is required" });
     }
 
-    // 1️⃣ Generate embedding (CORRECT)
-    console.log("Generating embedding...");
+    // 1️ Generate embedding (CORRECT)
 
     const embedRes = await ai.models.embedContent({
       model: "gemini-embedding-001",
@@ -79,7 +77,7 @@ router.post("/ask", async (req, res) => {
 
     console.log("Embedding length:", questionEmbedding.length);
 
-    // 2️⃣ Vector search
+    // 2️ Vector search
     const allVectors = await PolicyVector.find();
 
     const similarities = allVectors.map((v) => {
@@ -106,11 +104,8 @@ router.post("/ask", async (req, res) => {
         ? topChunks.map((c) => c.text).join("\n\n")
         : "No relevant policy context found.";
 
-    // 3️⃣ Generate answer (CORRECT)
-    console.log("Generating answer...");
-
     const prompt = `
-Use the policy text below to answer the question.
+    Use the policy text below to answer the question.
 
 CONTEXT:
 ${contextText}
@@ -141,7 +136,6 @@ If the answer is not in the context, respond:
       context: contextText,
     });
   } catch (err) {
-    console.error("🔥 Error in /ask:", err);
     res.status(500).json({ error: err.message });
   }
 });

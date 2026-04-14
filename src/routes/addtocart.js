@@ -1,12 +1,13 @@
 
 const express = require("express");
-const { postCart, getCart, increament, decreament, removeCart } = require("../controllers/addtocart");
+const { postCart, getCart, removeCart, increment, decrement } = require("../controllers/addtocart");
+const userAuth = require("../middleware/auth");
 
 const router = express.Router();
 
-router.post("/addCart",postCart);
-router.get("/getCart", getCart);
-router.put("/cart/:id/increament", increament);
-router.put("/cart/:id/decreament", decreament);
-router.delete("/cart/:id", removeCart);
+router.post("/addCart",userAuth,postCart);
+router.get("/getCart",userAuth, getCart);
+router.put("/cart/:id/increament",userAuth, increment);
+router.put("/cart/:id/decreament",userAuth, decrement);
+router.delete("/cart/:id",userAuth, removeCart);
 module.exports = router;

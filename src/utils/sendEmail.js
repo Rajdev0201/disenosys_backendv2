@@ -21,14 +21,23 @@ const sendMail =async (options)=>{
     //         }
     //     });
            
+           const htmlBody = options.html || options.text || "";
+           const textBody =
+            options.plainText ||
+            options.text ||
+            (typeof htmlBody === "string"
+              ? htmlBody.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
+              : "");
+
            const mailOptions = {
             from: 'classes@disenosys.com',
             to: options.to,
             subject: options.subject,
-            html: options.text,
+            text: textBody,
+            html: htmlBody,
         };
     
         await transporter.sendMail(mailOptions);
-    };
+     };
 
 module.exports = sendMail

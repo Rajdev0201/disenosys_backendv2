@@ -9,7 +9,7 @@ const router = express.Router();
 
 
 
-router.get('/', async (req, res) => {
+router.get('/exam/questions', async (req, res) => {
   try {
     const questions = await Question.find();
     res.json(questions);

@@ -30,3 +30,7 @@ router.delete("/delete-account", userAuth, deleteAccount);
 router.post("/user/forgotPassword",ResetLink)
 router.put("/user/changePassword/:token",ResetPassword)
 module.exports = router;
+
+
+
+
